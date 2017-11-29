@@ -22,3 +22,9 @@ What env variables required
 cmake -G Ninja
 ninja
 ```
+
+## Run
+```
+./bin/thread-test
+```
+Remark : Thread pool tests are ko for the moment.
