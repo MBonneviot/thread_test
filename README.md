@@ -7,6 +7,9 @@ What I installed
 * CMake 3.9.4
 * Ninja
 * Boost 1.65.1
+* Boost DI : https://github.com/boost-experimental/di
+
+Download boost di header file: di.hpp, and place it in a directory di/include/boost/ on level upper your checkout;
 
 What env variables required
 * export CLANG_DIR

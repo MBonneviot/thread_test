@@ -14,12 +14,17 @@ set(BOOST_ROOT $ENV{BOOST_DIR})
 find_package(Boost COMPONENTS unit_test_framework system thread REQUIRED)
 add_definitions(-DBOOST_TEST_DYN_LINK)
 
-include_directories(${Boost_INCLUDE_DIRS})
+set(BOOST_DI ${BOOST_ROOT}/../di/include)
+
+include_directories(
+    ${Boost_INCLUDE_DIRS}
+    ${BOOST_DI})
 
 add_executable(thread-test 
     boost_main.cpp 
     std_thread_tests.cpp
     asio_thread_tests.cpp
+    boost_di_test.cpp
     ThreadPool.cpp)
 
 target_link_libraries(thread-test 

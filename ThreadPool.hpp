@@ -16,8 +16,6 @@ public:
     void post(const std::function<void()>& function);
     void dispatch(const std::function<void()>& function);
 
-    void stopThread();
-
 private:
     boost::asio::io_service _ioService;
     std::unique_ptr<boost::asio::io_service::work> _work;

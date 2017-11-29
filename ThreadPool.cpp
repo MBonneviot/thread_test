@@ -11,15 +11,10 @@ ThreadPool::ThreadPool(std::size_t poolSize)
 
 ThreadPool::~ThreadPool()
 {
-    _pool.join_all();
-    _ioService.stop();
-}
-
-void ThreadPool::stopThread()
-{
     _work.reset();
+    _ioService.stop();
+    _pool.join_all();
 }
-
 
 void ThreadPool::post(const std::function<void()>& function)
 {
