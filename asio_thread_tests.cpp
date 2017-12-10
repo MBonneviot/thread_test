@@ -4,6 +4,7 @@
 
 #include <thread>
 #include <iostream>
+#include <type_traits>
 
 using namespace std::chrono_literals;
 
@@ -54,8 +55,6 @@ BOOST_AUTO_TEST_CASE( pool_thread_post_in )
     auto longFunction = [](){std::cout << "long" << std::endl; std::this_thread::sleep_for(100ms);};
     auto shortFunction = [&meaningOfLife](){std::cout << "short" << std::endl; meaningOfLife = 42;};
 
-    pool.post(shortFunction);
-
     pool.post(longFunction);
     pool.post(longFunction);
     pool.post(longFunction);
@@ -76,14 +75,14 @@ BOOST_AUTO_TEST_CASE( pool_thread_dispatch_run_first )
     int meaningOfLife = 0;
 
     pool.post([&meaningOfLife](){meaningOfLife = 1;std::this_thread::sleep_for(10ms);});
-    pool.post([&meaningOfLife](){meaningOfLife = 2;std::this_thread::sleep_for(10ms);});
-    pool.post([&meaningOfLife](){meaningOfLife = 3;std::this_thread::sleep_for(10ms);});
-    pool.post([&meaningOfLife](){meaningOfLife = 4;std::this_thread::sleep_for(10ms);});
+    pool.post([&meaningOfLife](){meaningOfLife = 2;std::this_thread::sleep_for(20ms);});
+    pool.post([&meaningOfLife](){meaningOfLife = 3;std::this_thread::sleep_for(30ms);});
+    pool.post([&meaningOfLife](){meaningOfLife = 4;std::this_thread::sleep_for(40ms);});
 
-    pool.post([&meaningOfLife](){meaningOfLife = 42;});
-    pool.dispatch([&meaningOfLife](){meaningOfLife = 24;});
+    pool.post([&meaningOfLife](){meaningOfLife = 24;});
+    pool.dispatch([&meaningOfLife](){meaningOfLife = 42;});
 
-    std::this_thread::sleep_for(10ms);
+    std::this_thread::sleep_for(15ms);
 
     BOOST_CHECK_EQUAL(42, meaningOfLife);
 }

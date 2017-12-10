@@ -1,9 +1,12 @@
 #include "ThreadPool.hpp"
 
+#include <boost/range/irange.hpp>
+
+
 ThreadPool::ThreadPool(std::size_t poolSize)
     : _work(new boost::asio::io_service::work(_ioService))
 {
-    for (std::size_t i ; i < poolSize ; ++i)
+    for (std::size_t i : boost::irange(std::size_t(0), poolSize))
     {
         _pool.create_thread([this](){_ioService.run();});
     }

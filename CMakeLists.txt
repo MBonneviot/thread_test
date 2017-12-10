@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.7.2)
 
 project(thread-test)
 
+set(CMAKE_BUILD_TYPE Debug)
+
 message("Using env varialbe CLANG_DIR: $ENV{CLANG_DIR}")
 message("Using env varialbe BOOST_DIR: $ENV{BOOST_DIR}")
 
